@@ -1,14 +1,14 @@
-import "./styles.css";
+const setFontSize={fontSize:"20px"}
 
-export default function App() {
+export const SumCard = () => {
   return (
-    <div className="App">
+    <div>
       <h1 className="app-header" style={{color:"green"}}>Sum of Two Numbers</h1>
       <div className="app-body">
-        <p>First Number :5</p>
-        <p>Second Number :4</p>
-        <p>Sum: 9</p>
+        <p style={setFontSize}>First Number :5</p>
+        <p style={setFontSize}>Second Number :4</p>
+        <p style={setFontSize}>Sum: 9</p>
       </div>
     </div>
   );
-}
+};
