@@ -6,51 +6,51 @@ const characters = {
     {
       name: "IRON MAN",
       powers: "Genius,Rich,IRON Suit",
-      costume: "IRON MAN suit",
+      costume: "IRON MAN suit"
     },
     {
       name: "ANT MAN",
       powers: "Ant man suit",
-      costume: "Ant man suit",
+      costume: "Ant man suit"
     },
     {
       name: "Spider-man",
       powers: "Reflexes,Speed,Spider-Sense",
-      costume: "Spider Suit",
+      costume: "Spider Suit"
     },
     {
       name: "Bat man",
       powers: "Rich,Bat suit",
-      costume: "Bat Suit",
+      costume: "Bat Suit"
     },
     {
       name: "Super-man",
       powers: "Superhuman strength,Reflexes,Speed",
-      costume: "Superman  Suit",
-    },
+      costume: "Superman  Suit"
+    }
   ],
   villains: [
     {
       name: "Thanos",
       powers: "Superhuman strength,Reflexes,Speed,",
-      costume: "Metal armor",
+      costume: "Metal armor"
     },
     {
       name: "Venom",
       powers: "shapeshifting and camouflage Symbiotes autonomous defense",
-      costume: "black suit",
+      costume: "black suit"
     },
     {
       name: "Kang the conqueror",
       powers: "time travel, can access all tech",
-      costume: "kang armor",
+      costume: "kang armor"
     },
     {
       name: "Joker",
       powers: "clownlike appearance and sick humour",
-      costume: "Joker costume",
-    },
-  ],
+      costume: "Joker costume"
+    }
+  ]
 };
 
 function Tab({ objectInformation }) {
@@ -59,8 +59,12 @@ function Tab({ objectInformation }) {
   function displayHeroes() {
     setDisplay(
       <ol>
-        {objectInformation.heroes.map(({ name }) => (
-          <li>{name}</li>
+        {objectInformation.heroes.map(({ name, powers, costume }) => (
+          <li>
+            <h1>{name}</h1>
+            <p> Powers : {powers} </p>
+            <p> Costume : {costume} </p>
+          </li>
         ))}
       </ol>
     );
@@ -68,8 +72,12 @@ function Tab({ objectInformation }) {
   function displayVillains() {
     setDisplay(
       <ol>
-        {objectInformation.villains.map(({ name }) => (
-          <li>{name}</li>
+        {objectInformation.villains.map(({ name, powers, costume }) => (
+          <li>
+            <h1>{name}</h1>
+            <p> Powers : {powers} </p>
+            <p> Costume : {costume} </p>
+          </li>
         ))}
       </ol>
     );
