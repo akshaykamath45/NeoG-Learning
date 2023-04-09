@@ -19,7 +19,6 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1 className="app-header">tanaypratap's box</h1>
       <div className="App">
         <div className="App">
           <h1>My Products</h1>
