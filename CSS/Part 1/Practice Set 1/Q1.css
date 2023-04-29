@@ -1,0 +1,38 @@
+body {
+    font-family: sans-serif;
+  }
+  
+  h1 {
+    font-size: 36px;
+    color: #333333;
+    margin-bottom: 20px;
+    /* By-Default Margin 22.5 px */
+  }
+  p {
+    /* margin-top:20px; */
+    font-size: 18px;
+    color: #666666;
+    line-height: 1.5;
+  }
+  
+/* 
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Parcel Sandbox</title>
+      <meta charset="UTF-8" />
+    </head>
+  
+    <body>
+      <div id="app"></div>
+      <h1>Welcome to My Website</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+      <script src="src/index.js"></script>
+    </body>
+  </html> */
