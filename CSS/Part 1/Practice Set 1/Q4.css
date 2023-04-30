@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+}
+input {
+  border: 1px solid #cccccc;
+  padding: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+button {
+  /* margin-left:10px; */
+  background-color: #333333;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+/* <!DOCTYPE html>
+<html>
+  <head>
+    <title>Practicse Set 1 Q4</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <input placeholder="Enter your email address"></input>
+    <button>Submit</button>
+    <script src="src/index.js"></script>
+  </body>
+</html> */
