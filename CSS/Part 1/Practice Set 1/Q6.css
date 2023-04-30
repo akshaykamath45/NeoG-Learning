@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin: 20px;
+}
+
+.card img {
+  width: 350px;
+  height: 150px;
+}
+.card p {
+  font-size: 24px;
+  color: #333333;
+  margin-right: 10px;
+}
+.card button {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+/* <!DOCTYPE html>
+<html>
+  <head>
+    <title>Practicse Set 1 Q6</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <div class="card">
+      <img src="https://via.placeholder.com/350x150" alt="card-image"></img>
+      <h2>Card Title</h2>
+      <button>Click Me!</button>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html> */
