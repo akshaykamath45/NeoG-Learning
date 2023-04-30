@@ -1,0 +1,42 @@
+body {
+  font-family: sans-serif;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin: 20px;
+}
+
+.card h2 {
+  font-size: 24px;
+  columns: #333333;
+  margin: 10px;
+}
+.card p {
+  font-size: 18px;
+  color: #666666;
+  margin: 10px;
+}
+
+/* <!DOCTYPE html>
+<html>
+  <head>
+    <title>Practicse Set 1 Q5</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/350x150" alt="Card image" />
+      <h2>Card Title</h2>
+      <p>This is an example description for the card.</p>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html> */
