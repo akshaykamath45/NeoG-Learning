@@ -1,0 +1,36 @@
+body {
+  font-family: sans-serif;
+}
+
+input {
+  width: 400px;
+  height: 40px;
+  border: 1px solid;
+  border-color: #cccccc;
+  margin: 10px 0 10px 0;
+  padding: 0 20px 0 20px;
+  background-color: white;
+  font-size: 16px;
+}
+
+/*pseudo element*/
+::placeholder {
+  color: #999999;
+  font-weight: 400;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* <!DOCTYPE html>
+<html>
+  <head>
+    <title>Practicse Set 1 Q7</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <input placeholder="Search"></input>
+    <script src="src/index.js"></script>
+  </body>
+</html> */
