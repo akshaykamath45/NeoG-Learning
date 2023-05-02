@@ -1,73 +1,60 @@
+import "./styles.css";
 import { fakeFetch } from "./api/fakefetch";
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const [userData, setUserData] = useState({});
-  const [showAddress, setShowAddress] = useState(false);
-  const [hideAddress, setHideAddress] = useState(false);
-  const [showAddressButton, setShowAddressButton] = useState(true);
-  const [hideAddressButton, setHideAddressButton] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const getUserData = async () => {
-    setIsLoading(true);
+  const [movies, setMovies] = useState([]);
+  const [userInput, setUserInput] = useState("");
+
+  const getMovieData = async () => {
     try {
-      const { data, status } = await fakeFetch("https://example.com/api/user");
+      const { data, status } = await fakeFetch(
+        "https://example.com/api/movies"
+      );
       if (status === 200) {
-        setUserData(data);
+        setMovies(data);
       }
-      setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
   };
-  const { name, email, phone, address } = userData;
+
   useEffect(() => {
-    getUserData();
+    getMovieData();
   }, []);
 
-  const displayAddress = () => {
-    setShowAddress(true);
-    setHideAddress(true);
-    setShowAddressButton(false);
-    setHideAddressButton(true);
+  const handleInput = (e) => {
+    setUserInput(e.target.value);
   };
-  const removeAddress = () => {
-    setShowAddress(false);
-    setHideAddress(true);
-    setShowAddressButton(true);
-    setHideAddressButton(false);
-    return <div></div>;
-  };
-  if (isLoading) {
-    return <div>Loading Data...</div>;
-  }
+
   return (
     <div>
-      <h1>User</h1>
-      <br />
-      Name: {name} <br />
-      Email: {email} <br />
-      Phone: {phone}
-      <br />
-      {showAddressButton && (
-        <button onClick={displayAddress}>Show Address</button>
-      )}
-      {hideAddress && hideAddressButton && (
-        <button onClick={removeAddress}>Hide Address</button>
-      )}
-      {showAddress && (
-        <div>
-          <br />
-          {address.street} <br />
-          {address.suite}
-          <br />
-          {address.city}
-          <br />
-          {address.zipcode}
-          <br />
-        </div>
-      )}
-      <div></div>
+      <h1>Movies</h1>
+      Filter by Year:
+      <select onChange={handleInput}>
+        <option value="">All</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+      </select>
+      {movies &&
+        movies
+          .filter((movie) => {
+            if (userInput === "") {
+              return true;
+            } else {
+              return movie.year.toString() === userInput;
+            }
+          })
+          .map(({ title, year, rating }) => (
+            <li key={title}>
+              <p>Name: {title}</p>
+              <p>Year: {year}</p>
+              <p>Rating: {rating}</p>
+            </li>
+          ))}
     </div>
   );
 }
@@ -75,26 +62,22 @@ export default function App() {
 export const fakeFetch = (url) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (url === "https://example.com/api/user") {
+      if (url === "https://example.com/api/movies") {
         resolve({
           status: 200,
           message: "Success",
-          data: {
-            name: "John Doe",
-            email: "john.doe@example.com",
-            phone: "+1 555-555-5555",
-            address: {
-              street: "123 Main St",
-              suite: "Suite 456",
-              city: "Anytown",
-              zipcode: "12345",
-            },
-          },
+          data: [
+            { title: "The Dark Knight", year: 2008, rating: 9.0 },
+            { title: "Inception", year: 2009, rating: 8.8 },
+            { title: "Interstellar", year: 2010, rating: 8.6 },
+            { title: "Tenet", year: 2009, rating: 7.5 },
+            { title: "Real Steal", year: 2007, rating: 7.5 },
+          ],
         });
       } else {
         reject({
           status: 404,
-          message: "User not found.",
+          message: "Movies list not found.",
         });
       }
     }, 2000);
