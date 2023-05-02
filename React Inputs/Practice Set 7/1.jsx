@@ -1,11 +1,12 @@
+import "./styles.css";
 import { fakeFetch } from "./api/fakefetch";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({});
-  const [isCelsius, setIsCelsius] = useState(true);
-  const [isFahrenheit, setIsFahrenheit] = useState(false);
-  const getWeatherData = async () => {
+  const [isCelsius, setIsCelcius] = useState(true);
+  const [isFarenheit, setIsFarenheit] = useState(false);
+  async function getWeatherData() {
     try {
       const { data, status } = await fakeFetch(
         "https://example.com/api/weather"
@@ -16,35 +17,41 @@ export default function App() {
     } catch (e) {
       console.log(e);
     }
-  };
+  }
+
   useEffect(() => {
     getWeatherData();
   }, []);
 
   const { temperature, humidity, windSpeed } = weatherData;
+
   const switchToFarenheit = () => {
-    setWeatherData({ ...weatherData, temperature: 70 });
-    setIsCelsius(false);
-    setIsFahrenheit(true);
+    setIsCelcius(false);
+    const updatedTemperature = { ...weatherData, temperature: 70 };
+    setWeatherData(updatedTemperature);
+    setIsFarenheit(true);
   };
-  const switchToCelsius = () => {
-    setWeatherData({ ...weatherData, temperature: 21 });
-    setIsCelsius(true);
-    setIsFahrenheit(false);
+
+  const switchToCelcius = () => {
+    setIsFarenheit(false);
+    const updatedTemperature = { ...weatherData, temperature: 21 };
+    setWeatherData(updatedTemperature);
+    setIsCelcius(true);
   };
   return (
     <div>
       <h1>Weather</h1>
       <p>
-        Temperature: {temperature} {isCelsius ? " °C" : " °F"}
+        Temperature: {temperature}
+        {isCelsius ? "°C" : "°F"}
       </p>
-      <p>Humidity: {humidity}%</p>
+      <p>Humidity: {humidity} %</p>
       <p>Wind Speed: {windSpeed} km/h</p>
       {isCelsius && (
         <button onClick={switchToFarenheit}>Switch to Fahrenheit</button>
       )}
-      {isFahrenheit && (
-        <button onClick={switchToCelsius}>Switch to Celsius</button>
+      {isFarenheit && (
+        <button onClick={switchToCelcius}>Switch to Celcius</button>
       )}
     </div>
   );
