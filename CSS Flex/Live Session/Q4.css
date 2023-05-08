@@ -1,0 +1,31 @@
+.card {
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  max-width: 250px;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.card button {
+  align-self: stretch;
+}
+
+/* import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="App">
+      <div className="card">
+        <p>
+          Discover the neoG Full Stack Development Course, offering expert-led
+          training in MERN stack. Build real-world projects and boost your web
+          development career.
+        </p>
+        <button> Enroll Now </button>
+      </div>
+    </div>
+  );
+} */
