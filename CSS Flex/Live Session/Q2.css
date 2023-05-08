@@ -1,0 +1,39 @@
+.row {
+  font-family: sans-serif;
+  display: flex;
+  height: 500px;
+  align-items: center;
+}
+
+.col {
+  background-color: aquamarine;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+/* .col + .end{
+    align-self: flex-end;
+  
+  } */
+
+.end {
+  align-self: flex-end;
+}
+
+/* import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="row">
+      <div className="col">A</div>
+      <div className="col">B</div>
+      <div className="col end">C</div>
+    </div>
+  );
+}
+
+// By default : flex-direction is row
+//main-axis alignment is horizontal (from L to R)
+//cross-axis alignment is verical (from T to B)
+// =>For Parent : We use align-items
+// =>For Children : We  use align-self */
