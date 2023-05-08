@@ -1,0 +1,25 @@
+.nav {
+  font-family: sans-serif;
+  display: flex;
+}
+
+.nav-item {
+  background-color: beige;
+  border: 1px solid black;
+  padding: 0.5rem;
+  list-style: none;
+}
+
+/* import "./styles.css";
+
+export default function App() {
+  return (
+    <nav className="nav">
+      <li className="nav-item">Home</li>
+      <li className="nav-item">about</li>
+      <li className="nav-item">products</li>
+      <li className="nav-item">cart</li>
+      <li className="nav-item">wishlist</li>
+    </nav>
+  );
+} */
