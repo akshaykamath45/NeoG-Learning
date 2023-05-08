@@ -1,0 +1,22 @@
+.row {
+  font-family: sans-serif;
+  display: flex;
+}
+
+.col {
+  background-color: aquamarine;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+/* import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="row">
+      <div className="col"> lorem ipsum dolor set </div>
+      <div className="col"> lorem ipsum dolor set </div>
+      <div className="col"> lorem ipsum dolor set </div>
+    </div>
+  );
+} */
