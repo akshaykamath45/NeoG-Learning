@@ -1,0 +1,4 @@
+input[type="range"] {
+  accent-color: purple;
+  cursor: pointer;
+}
