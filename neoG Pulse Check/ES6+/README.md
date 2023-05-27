@@ -30,9 +30,16 @@
 
 <hr>
 
-# NPC 5
+# NPC 5 (Pan Server)
 
 ## <i> 19th April,Wednesday</i> 
 
 ### Topic : React Practice Set 5 and Practice Set 6
 
+<hr>
+
+# NPC 6
+
+## <i> 27th April,Thursday</i> 
+
+### Topic : React Practice Set 5 and Practice Set 6
