@@ -17,7 +17,7 @@ export function ProductList({ products }) {
           <h2>
             {name} <small> INR {price} </small>
           </h2>
-          <button onClick={cartLogger}> Add to Cart </button>
+          <button onClick={cartLogger}> Add to Cart  </button>
         </div>
       ))}
     </div>
