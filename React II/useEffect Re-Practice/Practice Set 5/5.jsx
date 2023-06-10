@@ -14,8 +14,8 @@ export default function App() {
         setUserFeedData(data);
       }
       setIsLoading(false);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       setIsError(true);
       setIsLoading(false);
     }
