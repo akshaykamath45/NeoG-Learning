@@ -1,0 +1,15 @@
+section {
+  width: 480px;
+  background-color: yellowgreen;
+  padding: 0 16px;
+  margin: 0 24px;
+}
+section article {
+  width: 50%;
+  /* width:240px; */
+  background-color: red;
+  border: 6px solid currentColor;
+  padding: 0 16px;
+  margin: 0 24px;
+  box-sizing: border-box;
+}
