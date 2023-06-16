@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #ededed;
+  margin: 24px auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div {
+  position: relative;
+  font-size: 48px;
+  color: purple;
+}
+h3::after,
+h3::before {
+  font-family: cursive;
+  color: red;
+  position: relative;
+  font-size: 0.8em;
+}
+
+h3::before {
+  content: "^";
+  bottom: -36px;
+  left: 380px;
+}
+
+h3::after {
+  content: "only";
+  top: -65px;
+  right: 265px;
+}
