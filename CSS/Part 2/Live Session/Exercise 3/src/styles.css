@@ -1,0 +1,18 @@
+body {
+  font-family: sans-serif;
+  padding: 24px;
+}
+
+.container {
+  padding: 16px;
+  background: white;
+  border: 1px solid;
+}
+.container h2 {
+  background: #90a4ae;
+  padding: 16px;
+  margin: -16px -16px 16px;
+}
+p {
+  margin-bottom: 0px;
+}
