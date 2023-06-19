@@ -7,4 +7,4 @@ function oddAndEvenSumReducer(acc, value) {
 
 const initialAccumulator = { odd: 0, even: 0 };
 
-numList.reduce(oddAndEvenSumReducer, initialAccumulator);
+console.log(numList.reduce(oddAndEvenSumReducer, initialAccumulator));
