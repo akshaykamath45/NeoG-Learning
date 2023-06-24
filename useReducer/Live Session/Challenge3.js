@@ -29,10 +29,10 @@ console.log(numList.reduce(reducer,state))
 // function counterReducer(state, action) {
 //   switch (action.type) {
 //     case 'INCREMENT':
-//       return { count: count + 1 }
+//       return { count: state.count + 1 }
 
 //     case 'DECREMENT':
-//       return { count: count - 1 }
+//       return { count: state.count - 1 }
 //   }
 // }
 
