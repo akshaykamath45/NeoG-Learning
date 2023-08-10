@@ -1,0 +1,16 @@
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  gap: 10px;
+}
+.menu-item {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid black;
+  text-align: left;
+}
+.menu-image {
+  width: 100%;
+  height: 200px;
+}
