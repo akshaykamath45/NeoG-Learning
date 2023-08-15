@@ -1,0 +1,40 @@
+.App {
+  font-family: sans-serif;
+  text-align: left;
+}
+.layout {
+  display: grid; /* step I*/
+  /*3 units mean 3 column layout using 2 uits will shift to 2 column*/
+  grid-template-columns: 1fr;
+  /* grid-template-columns: repeat(2,1fr); =>another syntax*/
+
+  /* to do rows */
+  grid-template-rows: 1fr 1fr 1fr;
+
+  border: 1px solid black;
+}
+
+.card {
+  background-color: aquamarine;
+  border: 1px solid black;
+  padding: 0.5rem;
+  height: 50px;
+}
+
+/*Tablet View*/
+@media screen and (min-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+  .card {
+    height: 150px;
+  }
+}
+
+/*Descktop View*/
+@media screen and (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
