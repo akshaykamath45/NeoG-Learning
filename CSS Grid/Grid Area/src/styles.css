@@ -1,0 +1,47 @@
+.App {
+  font-family: sans-serif;
+}
+
+.layout {
+  display: grid;
+  grid-template-areas:
+    "nav nav nav"
+    "main main main"
+    "side side side"
+    "footer footer footer";
+  /* Can directly do like this
+    'nav'
+    'main'
+    'side'
+    'footer' */
+}
+
+.navigation {
+  background-color: beige;
+  grid-area: nav;
+}
+.main {
+  grid-area: main;
+  background-color: aquamarine;
+  border: 1px solid black;
+}
+.card {
+  border: 1px solid black;
+}
+.side {
+  grid-area: side;
+  background-color: rgb(97, 158, 238);
+}
+.footer {
+  grid-area: footer;
+  background-color: beige;
+}
+
+@media screen and (min-width: 1024px) {
+  .layout {
+    grid-template-areas:
+      "nav nav nav"
+      "main main side"
+      "footer footer footer";
+  }
+}
