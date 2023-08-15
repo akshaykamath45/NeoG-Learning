@@ -1,0 +1,50 @@
+.App {
+  font-family: sans-serif;
+}
+
+/*Using defalut for Phone*/
+body {
+  background-color: green;
+  text-align: left;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+p {
+  font-size: 1rem;
+}
+
+/*Using  for Tablet*/
+@media screen and (min-width: 768px) {
+  body {
+    background-color: white;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  p {
+    font-size: 1.125rem;
+  }
+}
+
+/*Using  for Laptop*/
+@media screen and (min-width: 1024px) {
+  body {
+    background-color: orange;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+}
