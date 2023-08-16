@@ -38,7 +38,32 @@ function reducer(state, action) {
   }
 }
 
+function switchCaseReducer(state, action) {
+  switch (action.type) {
+    case "odd":
+      return { ...state, odd: state.odd + action.payload };
+    case "even":
+      return { ...state, even: state.even + action.payload };
+  }
+}
+
 const initialAccumulator = { odd: 0, even: 0 };
+function counterReducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: count + 1 };
+
+    case "DECREMENT":
+      return { count: count - 1 };
+  }
+}
+
+// Dry run  // + - // Define state, action pair             // state
+// 1: +  state: { count: 0 }, action: { type: 'INCREMENT' } // { count: 1 }
+// 2: +  state: { count: 1 }, action: { type: 'INCREMENT' } // { count: 2 }
+// 3: -  state: { count: 2 }, action: { type: 'DECREMENT' } // { count: 1 }
+// 4: +  state: { count: 1 }, action: { type: 'INCREMENT' } // { count: 2 }
+// 5: +  state: { count: 2 }, action: { type: 'INCREMENT' } // { count: 3 }
 
 //replace acc by state
 //replace value by action
@@ -49,5 +74,5 @@ const oddAndEvenSum1 = numList1.reduce(
 );
 console.log(oddAndEvenSum1);
 
-const oddAndEvenSum2 = numList2.reduce(reducer, initialAccumulator);
+const oddAndEvenSum2 = numList2.reduce(switchCaseReducer, initialAccumulator);
 console.log(oddAndEvenSum2);
