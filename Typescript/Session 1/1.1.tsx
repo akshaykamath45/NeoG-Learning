@@ -1,5 +1,4 @@
-import "./styles.css";
-
+import React from "react";
 export default function App() {
   // let variableName: variableType
   let myNumber: number = 42;
