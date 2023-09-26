@@ -62,7 +62,7 @@ app.get("/cars", (req, res) => {
   res.json(filteredCars);
 });
 
-//route parameters,will use res.param to destrucutre
+//route parameters,will use res.params to destrucutre
 app.get("/cars/:id", (req, res) => {
   const carId = parseInt(req.params.id);
   // const {id}=req.params;
@@ -71,6 +71,23 @@ app.get("/cars/:id", (req, res) => {
     res.json(car);
   } else {
     res.status(404).json({ error: "Car not found" });
+  }
+});
+
+//using multiple route parameters
+app.get("/cars/:make/:model", (req, res) => {
+  const make = req.params.make.toLowerCase();
+  const model = req.params.model.toLowerCase();
+  console.log(make, model);
+
+  let filteredCar = cars.filter(
+    (car) =>
+      car.make.toLowerCase() === make && car.model.toLowerCase() === model
+  );
+  if (filteredCar.length === 0) {
+    res.status(404).json({ error: "Car not found" });
+  } else if (filteredCar) {
+    res.json(filteredCar);
   }
 });
 
