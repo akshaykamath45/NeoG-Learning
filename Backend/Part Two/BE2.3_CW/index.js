@@ -108,8 +108,13 @@ app.get("/cars/:make/:model", (req, res) => {
 
 app.post("/cars", (req, res) => {
   const newCar = req.body;
-  cars.push(newCar);
-  res.status(201).json({ message: "Car added succefully", car: newCar });
+  //data vaidation
+  if (!newCar.make || !newCar.model || !newCar.year) {
+    res.status(404).json({ error: "Make,Model and Year required" });
+  } else {
+    cars.push(newCar);
+    res.status(201).json({ message: "Car added succefully", car: newCar });
+  }
 });
 
 // Request Body: In a POST request, data is sent in the request body. The server decodes this data and processes it based on the route.
