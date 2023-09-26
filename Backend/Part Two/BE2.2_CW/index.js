@@ -48,7 +48,7 @@ app.get("/cars", (req, res) => {
   //req.query will store the key value pairs as an object
   //this is done using query parameter
   const { make, model } = req.query; // we can access query parameters for filtering
-  let filteredCars = cars;
+  let filteredCars;
   if (make) {
     filteredCars = cars.filter(
       (car) => car.make.toLowerCase() === make.toLowerCase()
@@ -59,7 +59,12 @@ app.get("/cars", (req, res) => {
       (car) => car.model.toLowerCase() === model.toLowerCase()
     );
   }
-  res.json(filteredCars);
+  //error handling
+  if (filteredCars.length == 0) {
+    res.status(404).json({ error: "No cars matching query parameters" });
+  } else {
+    res.json(filteredCars); //when we do res.json is already set to 200
+  }
 });
 
 //using header -->more specific route must come before general route,as it goes from top to bottom
