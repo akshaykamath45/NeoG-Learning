@@ -112,6 +112,9 @@ app.post("/cars", (req, res) => {
   res.status(201).json({ message: "Car added succefully", car: newCar });
 });
 
+// Request Body: In a POST request, data is sent in the request body. The server decodes this data and processes it based on the route.
+//Security Concerns: Sending data via the request body isn't inherently secure, especially when dealing with sensitive information. HTTPS (SSL/TLS) encryption is essential to secure data during transmission.
+
 //Postman
 
 //connecting server,port.
