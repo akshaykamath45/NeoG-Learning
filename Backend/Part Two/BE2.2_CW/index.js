@@ -42,8 +42,19 @@ app.get("/contact", (req, res) => {
 });
 
 app.get("/cars", (req, res) => {
-  res.json(cars);
-  const { make, model } = req.query; // we can access
+  const { make, model } = req.query; // we can access query parameters for filtering
+  let filteredCars = cars;
+  if (make) {
+    filteredCars = cars.filter(
+      (car) => car.make.toLowerCase() === make.toLowerCase()
+    );
+  }
+  if (model) {
+    filteredCars = cars.filter(
+      (car) => car.model.toLowerCase() === model.toLowerCase()
+    );
+  }
+  res.json(filteredCars);
 });
 
 //Postman
