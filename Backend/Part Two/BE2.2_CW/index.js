@@ -68,7 +68,7 @@ app.get("/cars", (req, res) => {
 });
 
 //using header -->more specific route must come before general route,as it goes from top to bottom
-
+//always place static route before dynamic routess
 app.get("/cars/featured", (req, res) => {
   const getFeatureRequest = req.header("x-featured-request");
   if (getFeatureRequest) {
