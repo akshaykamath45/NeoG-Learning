@@ -120,6 +120,23 @@ app.post("/cars", (req, res) => {
 // Request Body: In a POST request, data is sent in the request body. The server decodes this data and processes it based on the route.
 //Security Concerns: Sending data via the request body isn't inherently secure, especially when dealing with sensitive information. HTTPS (SSL/TLS) encryption is essential to secure data during transmission.
 
+// Design of APIs
+
+// /cars - GET will get all cars, POST will create a new car
+// /cars/:id - GET will get the id car, POST will update that id car
+
+app.post("/cars/:id", (req, res) => {
+  const carId = parseInt(req.params.id);
+  const updatedCarData = req.body;
+
+  const findCarToUpdate = cars.find((car) => car.id === carId);
+  if (findCarToUpdate) {
+    Object.assign(findCarToUpdate, updatedCarData);
+    res.json({ message: "Updated car successfully", car: updatedCarData });
+  } else {
+    res.status(404).json({ error: "Car not found" });
+  }
+});
 //Postman
 
 //connecting server,port.
