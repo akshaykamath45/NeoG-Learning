@@ -41,7 +41,12 @@ app.get("/contact", (req, res) => {
   res.send("This is the contact page");
 });
 
+//filtering using query parameters and route parameters
+
+//query parameters,will use res.query to destructure
 app.get("/cars", (req, res) => {
+  //req.query will store the key value pairs as an object
+  //this is done using query parameter
   const { make, model } = req.query; // we can access query parameters for filtering
   let filteredCars = cars;
   if (make) {
@@ -55,6 +60,18 @@ app.get("/cars", (req, res) => {
     );
   }
   res.json(filteredCars);
+});
+
+//route parameters,will use res.param to destrucutre
+app.get("/cars/:id", (req, res) => {
+  const carId = parseInt(req.params.id);
+  // const {id}=req.params;
+  const car = cars.find((car) => car.id === carId);
+  if (car) {
+    res.json(car);
+  } else {
+    res.status(404).json({ error: "Car not found" });
+  }
 });
 
 //Postman
