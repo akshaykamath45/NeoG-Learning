@@ -131,12 +131,19 @@ app.post("/cars/:id", (req, res) => {
 
   const findCarToUpdate = cars.find((car) => car.id === carId);
   if (findCarToUpdate) {
-    Object.assign(findCarToUpdate, updatedCarData);
-    res.json({ message: "Updated car successfully", car: updatedCarData });
+    if (!updatedCarData.make || !updatedCarData.model || !updatedCarData.year) {
+      res
+        .status(404)
+        .json({ error: "Make,Model,and Year of Updated Car Required " });
+    } else {
+      Object.assign(findCarToUpdate, updatedCarData);
+      res.json({ message: "Updated car successfully", car: updatedCarData });
+    }
   } else {
-    res.status(404).json({ error: "Car not found" });
+    res.status(404).json({ error: "Cannot find car to update" });
   }
 });
+
 //Postman
 
 //connecting server,port.
