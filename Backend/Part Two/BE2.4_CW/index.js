@@ -169,6 +169,13 @@ app.post("/cars/:id", (req, res) => {
 // Deleting a product ->DELETE products/:id
 // Retrieving one product details - GET products/:id
 
+// ex02: design endpoints for posts
+// Adding a new post ->POST /posts
+// Retrieving all posts ->GET/posts
+// Updating a specific post ->POST or PUT posts/:postId
+// Retrieving all posts by a user ->GET posts/:userId/posts
+// Retrieving a particular post by a user ->GET posts/:userId/:postId
+
 //Postman
 
 //connecting server,port.
