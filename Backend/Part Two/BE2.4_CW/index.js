@@ -184,6 +184,11 @@ app.post("/cars/:id", (req, res) => {
 // Retrieving one specific customer’s all orders ->GET /customers/:customerId/orders
 // Retrieving one specific customer’s particular order details ->GET /customers/:customerId/orders/:orderId
 
+//https status codes
+// 2xx(Success): Things went well.
+// 3xx(Redirecton): Go somewhere else or take more steps.
+// 4xx(Client Error): You made a mistake or the requested resource can't be found.
+// 5xx(Server Error): The server goofed up or can't handle the request.
 //Postman
 
 //connecting server,port.
