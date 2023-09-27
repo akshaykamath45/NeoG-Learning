@@ -105,7 +105,7 @@ app.get("/cars/:make/:model", (req, res) => {
 });
 
 //Writing Post Requests
-
+//Introduction to POST requests
 app.post("/cars", (req, res) => {
   const newCar = req.body;
   //data vaidation
