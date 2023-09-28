@@ -11,6 +11,7 @@ const loggerMiddleware = (req, res, next) => {
 };
 app.use(loggerMiddleware);
 
+//validation
 const validateMiddleware = (req, res, next) => {
   const validateParam = req.query.validate;
   if (validateParam === "true") {
@@ -19,6 +20,24 @@ const validateMiddleware = (req, res, next) => {
     res.status(403).json({ error: "Validation failed" });
   }
 };
+
+//authentication
+function checkAuthentication(req) {
+  return req.headers.authorization === "Bearer validAuthToken";
+}
+
+const authenticateMiddleware = (req, res, next) => {
+  const isAuthenticated = checkAuthentication(req);
+  if (isAuthenticated) {
+    next();
+  } else {
+    res.status(401).json({ error: "Unauthorised" });
+  }
+};
+
+app.post("/secure-action", authenticateMiddleware, (req, res) => {
+  res.json({ message: "Secure action executed succesfully" });
+});
 
 //using routers
 app.use("/cars", carRouter);
