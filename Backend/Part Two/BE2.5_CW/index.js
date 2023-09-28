@@ -4,6 +4,8 @@ const app = express();
 // app.use(express.json()); //inbuilt middleware to parse json bodies,for post requests
 const carRouter = require("./car.router");
 
+//Routers and Middleware
+
 //middleware
 const loggerMiddleware = (req, res, next) => {
   console.log("Incoming request at: ", new Date().toISOString());
