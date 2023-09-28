@@ -1,8 +1,15 @@
 //creating instance of express application
 const express = require("express");
 const app = express();
-app.use(express.json()); //inbuilt middleware to parse json bodies,for post requests
+// app.use(express.json()); //inbuilt middleware to parse json bodies,for post requests
 const carRouter = require("./car.router");
+
+//middleware
+const loggerMiddleware = (req, res, next) => {
+  console.log("Incoming request at: ", new Date().toISOString());
+  next(); //move to the next middleware or route handler
+};
+app.use(loggerMiddleware);
 app.use("/cars", carRouter);
 
 const cars = [
