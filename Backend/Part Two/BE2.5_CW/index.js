@@ -39,6 +39,23 @@ app.post("/secure-action", authenticateMiddleware, (req, res) => {
   res.json({ message: "Secure action executed succesfully" });
 });
 
+//middleware for entire router
+const responseHeaderMiddleware = (req, res, next) => {
+  res.setHeader("X-App-Version", "1.0"); //setting custom response header
+  next();
+};
+
+carRouter.use(responseHeaderMiddleware);
+
+// Middleware for logging every incoming request
+const logAllRequestsMiddleware = (req, res, next) => {
+  console.log("Request received:", req.method, req.url);
+  next(); // Proceed to the next middleware or route handler
+};
+
+// Applying middleware for every route
+app.use(logAllRequestsMiddleware);
+
 //using routers
 app.use("/cars", carRouter);
 
