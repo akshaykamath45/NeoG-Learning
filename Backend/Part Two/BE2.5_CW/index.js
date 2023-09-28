@@ -10,6 +10,17 @@ const loggerMiddleware = (req, res, next) => {
   next(); //move to the next middleware or route handler
 };
 app.use(loggerMiddleware);
+
+const validateMiddleware = (req, res, next) => {
+  const validateParam = req.query.validate;
+  if (validateParam === "true") {
+    next();
+  } else {
+    res.status(403).json({ error: "Validation failed" });
+  }
+};
+
+//using routers
 app.use("/cars", carRouter);
 
 const cars = [
@@ -85,7 +96,7 @@ carRouter.get("/featured", (req, res) => {
   }
 });
 //route parameters,will use res.params to destrucutre
-app.get("/cars/:id", (req, res) => {
+carRouter.get("/:id", validateMiddleware, (req, res) => {
   const carId = parseInt(req.params.id);
   // const {id}=req.params;
   const car = cars.find((car) => car.id === carId);
