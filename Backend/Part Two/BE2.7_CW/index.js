@@ -35,12 +35,14 @@ async function signup(userDetails) {
 }
 
 //user login API
-
 app.post("/login", async (req, res) => {
   try {
     const loginUser = await login(req.body.email, req.body.password);
     if (loginUser) {
-      res.json({ message: "User loggedin succesfully" });
+      res.json({
+        message: `User loggedin succesfully with the username : ${loginUser.username}`,
+        user: loginUser,
+      });
     } else {
       res.status(404).json({ error: "Login failed,invalid credentials." });
     }
@@ -51,18 +53,16 @@ app.post("/login", async (req, res) => {
 
 async function login(userEmail, userPassword) {
   try {
-    const findEmail = await User.findOne({ email: userEmail });
-    let checkLogin = false;
+    const findUser = await User.findOne({ email: userEmail });
+
     // const findPassword=await User.findOne({password:userPassword});
-    // console.log(findEmail.password)
-    if (findEmail && findEmail.password === userPassword) {
+    // console.log(findUser.password)
+    if (findUser && findUser.password === userPassword) {
       console.log("User logged in successfully");
-      checkLogin = true;
+      return findUser;
     } else {
       console.log("Invalid Credentials");
-      checkLogin = false;
     }
-    return checkLogin;
   } catch (e) {
     throw e;
   }
