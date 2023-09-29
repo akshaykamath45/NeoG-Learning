@@ -86,13 +86,15 @@ async function readAllMovies() {
 }
 
 //reading movies by a actor API
-app.get("/movies/actors/:actorName", async (req, res) => {
+app.get("/movies/actor/:actorName", async (req, res) => {
   try {
     const findMoviesByActor = await readMoviesByActor(req.params.actorName);
     if (findMoviesByActor.length === 0) {
-      res.status(404).json({
-        error: `Movie not found for the actor ${req.params.actorName}`,
-      });
+      res
+        .status(404)
+        .json({
+          error: `Movie not found for the actor ${req.params.actorName}`,
+        });
     } else {
       res.json(findMoviesByActor);
     }
@@ -111,6 +113,37 @@ async function readMoviesByActor(actorName) {
     console.log(`Error reading movies by actor  ${actorName} `, e);
   }
 }
+
+//reading movies by director API
+app.get("/movies/director/:directorName", async (req, res) => {
+  try {
+    const findMoviesByDirector = await readMoviesByDirector(
+      req.params.directorName
+    );
+    if (findMoviesByDirector.length === 0) {
+      res
+        .status(404)
+        .json({
+          error: `Cannot find movies for the director ${req.params.directorName}`,
+        });
+    } else {
+      res.json(findMoviesByDirector);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed fetching movies for the director" });
+  }
+});
+
+async function readMoviesByDirector(directorName) {
+  try {
+    const moviesByDirector = await Movie.find({ director: directorName });
+    console.log(`Movies by director ${directorName}`, moviesByDirector);
+    return moviesByDirector;
+  } catch (e) {
+    console.log(`Error reading movies by director  ${directorName}`, e);
+  }
+}
+// readMoviesByDirector("Rajkumar Hirani")
 
 //seeding database with inital values
 async function seedDatabase() {
@@ -141,16 +174,6 @@ async function seedDatabase() {
   }
 }
 // seedDatabase();
-
-async function readMoviesByDirector(directorName) {
-  try {
-    const moviesByDirector = await Movie.find({ director: directorName });
-    console.log(`Movies by director ${directorName}`, moviesByDirector);
-  } catch (e) {
-    console.log(`Error reading movies by director  ${directorName}`, e);
-  }
-}
-// readMoviesByDirector("Rajkumar Hirani")
 
 //read all movies for a given year and genre
 async function readMoviesByYear(movieYear) {
