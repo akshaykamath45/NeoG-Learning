@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
 });
 
 //user signup API
-
 app.post("/signup", async (req, res) => {
   try {
     const addUser = await signup(req.body);
@@ -34,6 +33,40 @@ async function signup(userDetails) {
     console.log("Error creating user ", e);
   }
 }
+
+//user login API
+
+app.post("/login", async (req, res) => {
+  try {
+    const loginUser = await login(req.body.email, req.body.password);
+    if (loginUser) {
+      res.json({ message: "User loggedin succesfully" });
+    } else {
+      res.status(404).json({ error: "Login failed,invalid credentials." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed logging in user" });
+  }
+});
+
+async function login(userEmail, userPassword) {
+  try {
+    const findEmail = await User.findOne({ email: userEmail });
+    let checkLogin = false;
+    // const findPassword=await User.findOne({password:userPassword});
+    // console.log(findEmail.password)
+    if (findEmail && findEmail.password === userPassword) {
+      console.log("User logged in successfully");
+      checkLogin = true;
+    } else {
+      console.log("Invalid Credentials");
+      checkLogin = false;
+    }
+    return checkLogin;
+  } catch (e) {
+    throw e;
+  }
+}
 async function addUser() {
   try {
     const newUser = new User({
@@ -51,20 +84,6 @@ async function addUser() {
 }
 // addUser();
 
-async function login(userEmail, userPassword) {
-  try {
-    const findEmail = await User.findOne({ email: userEmail });
-    // const findPassword=await User.findOne({password:userPassword});
-    // console.log(findEmail.password)
-    if (findEmail && findEmail.password === userPassword) {
-      console.log("User logged in successfully");
-    } else {
-      console.log("Invalid Credentials");
-    }
-  } catch (e) {
-    throw e;
-  }
-}
 // try{
 // login("example@example.com","password123");
 // }catch(e){
