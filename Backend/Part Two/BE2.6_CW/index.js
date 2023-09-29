@@ -51,6 +51,7 @@ app.get("/movies/:title", async (req, res) => {
     res.status(404).json({ error: "Error validating  movie" });
   }
 });
+
 async function readMovie(movieName) {
   try {
     const findMovie = await Movie.findOne({ title: movieName });
@@ -143,7 +144,35 @@ async function readMoviesByDirector(directorName) {
     console.log(`Error reading movies by director  ${directorName}`, e);
   }
 }
-// readMoviesByDirector("Rajkumar Hirani")
+
+//reading movies by genre API
+app.get("/movies/genre/:genreName", async (req, res) => {
+  try {
+    const findMoviesByGenre = await readMoviesByGenre(req.params.genreName);
+    if (findMoviesByGenre.length === 0) {
+      res
+        .status(404)
+        .json({
+          error: `Cannot find movies by the genre ${req.params.genreName}`,
+        });
+    } else {
+      res.json(findMoviesByGenre);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching movies by the genre" });
+  }
+});
+
+async function readMoviesByGenre(movieGenre) {
+  try {
+    const moviesByGenre = await Movie.find({ genre: movieGenre });
+    console.log(`Movie by genre ${movieGenre} `, moviesByGenre);
+    return moviesByGenre;
+  } catch (e) {
+    console.log("Error reading movies by genre ", e);
+  }
+}
+// readMoviesByGenre("Drama");
 
 //seeding database with inital values
 async function seedDatabase() {
@@ -185,16 +214,6 @@ async function readMoviesByYear(movieYear) {
   }
 }
 // readMoviesByYear(2001)
-
-async function readMoviesByGenre(movieGenre) {
-  try {
-    const moviesByGenre = await Movie.find({ genre: movieGenre });
-    console.log(`Movie by genre ${movieGenre} `, moviesByGenre);
-  } catch (e) {
-    console.log("Error reading movies by genre ", e);
-  }
-}
-// readMoviesByGenre("Drama");
 
 //update
 async function updateMovieById(movieId, updateData) {
@@ -266,5 +285,8 @@ async function sortMoviesByYear() {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT} `);
+});
+n(PORT, () => {
   console.log(`Server is running on port ${PORT} `);
 });
