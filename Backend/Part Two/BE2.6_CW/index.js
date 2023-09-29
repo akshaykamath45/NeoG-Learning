@@ -209,6 +209,34 @@ async function updateMovieById(movieId, updateData) {
   }
 }
 
+//deleting a movie API
+app.delete("/movies/:movieId", async (req, res) => {
+  try {
+    const deleteMovie = await deleteMovieById(req.params.movieId);
+    if (deleteMovie) {
+      res.json({ message: `Deleted Movie successfully` });
+    } else {
+      res.status(404).json({ error: "Cannot find movie to delete" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed deleting movie" });
+  }
+});
+
+async function deleteMovieById(movieId) {
+  try {
+    const deleteMovie = await Movie.findByIdAndDelete(movieId);
+    if (deleteMovie) {
+      console.log("Deleted  Movie ", deleteMovie.title);
+    } else {
+      console.log("Cannot find movie to delete");
+    }
+    return deleteMovie;
+  } catch (e) {
+    console.log("Error deleting movie ", e);
+  }
+}
+
 //seeding database with inital values
 async function seedDatabase() {
   try {
@@ -249,19 +277,6 @@ async function readMoviesByYear(movieYear) {
   }
 }
 // readMoviesByYear(2001)
-
-//delete
-async function deleteMovieById(movieId) {
-  try {
-    const deleteMovie = await Movie.findByIdAndDelete(movieId);
-    if (deleteMovie) {
-      console.log("Deleted  Movie ", deleteMovie);
-    }
-  } catch (e) {
-    console.log("Error deleting movie ", e);
-  }
-}
-// deleteMovieById("650612e97add67374607a782")
 
 //sorting
 async function sortMoviesByRatings() {
