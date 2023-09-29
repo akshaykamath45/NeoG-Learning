@@ -65,6 +65,26 @@ async function readMovie(movieName) {
   }
 }
 
+//reading all movies
+app.get("/movies", async (req, res) => {
+  try {
+    const readMovies = await readAllMovies();
+    res.json(readMovies);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching all movies" });
+  }
+});
+
+async function readAllMovies() {
+  try {
+    const findAllMovies = await Movie.find({});
+    console.log("Read all movies ");
+    return findAllMovies;
+  } catch (e) {
+    console.log("Error fetching all movies ", e);
+  }
+}
+
 //seeding database with inital values
 async function seedDatabase() {
   try {
@@ -94,17 +114,6 @@ async function seedDatabase() {
   }
 }
 // seedDatabase();
-
-//read all movies,use Find
-async function readAllMovies() {
-  try {
-    const findAllMovies = await Movie.find({});
-    console.log("Read all movies ", findAllMovies);
-  } catch (e) {
-    console.log("Error fetching all movies ", e);
-  }
-}
-readAllMovies();
 
 //filter movies based on given actor and director
 async function readMoviesByActor(actorName) {
