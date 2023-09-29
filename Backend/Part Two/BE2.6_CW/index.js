@@ -42,12 +42,12 @@ app.get("/movies/ratings", async (req, res) => {
   try {
     const movies = await sortMoviesByRatings();
     if (movies.length === 0) {
-      res.status(404).json({ error: "Cannot sort movies" });
+      res.status(404).json({ error: "Cannot sort movies by rating" });
     } else {
       res.json({ message: "Sorted Movies by Ratings", movies: movies });
     }
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch ratings" });
+    res.status(500).json({ error: "Failed to fetch movie by rating" });
   }
 });
 
@@ -58,6 +58,30 @@ async function sortMoviesByRatings() {
     return sortMovie;
   } catch (e) {
     console.log("Error sorting movies by rating ", e);
+  }
+}
+
+//reading movies by release year API
+app.get("/movies/release-years", async (req, res) => {
+  try {
+    const movies = await sortMoviesByReleaseYear();
+    if (movies.length === 0) {
+      res.status(404).json({ error: "Cannot sort movies by release year" });
+    } else {
+      res.json({ message: "Sorted Movies by Release Years", movies: movies });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch movies by release year" });
+  }
+});
+async function sortMoviesByReleaseYear() {
+  //1 for ascending ,-1 for descending
+  try {
+    const sortMovies = await Movie.find({}).sort({ releaseYear: 1 });
+    console.log("Sorted Movies by Release Years ", sortMovies);
+    return sortMovies;
+  } catch (e) {
+    console.log("Error sorting movies ", e);
   }
 }
 
@@ -301,17 +325,6 @@ async function readMoviesByYear(movieYear) {
   }
 }
 // readMoviesByYear(2001)
-
-async function sortMoviesByYear() {
-  //1 for ascending ,2 for descending
-  try {
-    const sortMovies = await Movie.find({}).sort({ releaseYear: -1 });
-    console.log("Sorted Movies by Release Years ", sortMovies);
-  } catch (e) {
-    console.log("Error sorting movies ", e);
-  }
-}
-// sortMoviesByYear();
 
 //deleting all movies
 // async function deleteAllMovies() {
