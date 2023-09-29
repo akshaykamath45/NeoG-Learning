@@ -65,7 +65,7 @@ async function readMovie(movieName) {
   }
 }
 
-//reading all movies
+//reading all movies API
 app.get("/movies", async (req, res) => {
   try {
     const readMovies = await readAllMovies();
@@ -82,6 +82,33 @@ async function readAllMovies() {
     return findAllMovies;
   } catch (e) {
     console.log("Error fetching all movies ", e);
+  }
+}
+
+//reading movies by a actor API
+app.get("/movies/actors/:actorName", async (req, res) => {
+  try {
+    const findMoviesByActor = await readMoviesByActor(req.params.actorName);
+    if (findMoviesByActor.length === 0) {
+      res.status(404).json({
+        error: `Movie not found for the actor ${req.params.actorName}`,
+      });
+    } else {
+      res.json(findMoviesByActor);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed reading movie for the actor" });
+  }
+});
+
+//filter movies based on given actor
+async function readMoviesByActor(actorName) {
+  try {
+    const moviesByActor = await Movie.find({ actors: actorName });
+    console.log(`Movies by actor  ${actorName} `, moviesByActor);
+    return moviesByActor;
+  } catch (e) {
+    console.log(`Error reading movies by actor  ${actorName} `, e);
   }
 }
 
@@ -114,17 +141,6 @@ async function seedDatabase() {
   }
 }
 // seedDatabase();
-
-//filter movies based on given actor and director
-async function readMoviesByActor(actorName) {
-  try {
-    const moviesByActor = await Movie.find({ actors: actorName });
-    console.log(`Movies by actor  ${actorName} `, moviesByActor);
-  } catch (e) {
-    console.log(`Error reading movies by actor  ${actorName} `, e);
-  }
-}
-// readMoviesByActor("Salman Khan")
 
 async function readMoviesByDirector(directorName) {
   try {
