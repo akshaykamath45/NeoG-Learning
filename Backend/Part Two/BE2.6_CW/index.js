@@ -172,7 +172,42 @@ async function readMoviesByGenre(movieGenre) {
     console.log("Error reading movies by genre ", e);
   }
 }
-// readMoviesByGenre("Drama");
+
+//updating a movie API
+app.post("/movies/:movieId", async (req, res) => {
+  try {
+    const updateMovie = await updateMovieById(req.params.movieId, req.body);
+    if (updateMovie) {
+      res.json({ message: "Updated movie succesfully", movie: updateMovie });
+    } else {
+      res.status(404).json({ error: "Cannot find the movie to update" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed updating movie data", errorMessage: error });
+  }
+});
+
+async function updateMovieById(movieId, updateData) {
+  try {
+    const updateMovie = await Movie.findByIdAndUpdate(
+      movieId,
+      updateData,
+      { new: true },
+      { runValidators: true }
+    );
+    //Movie.findOneAndUpdate({title:title},updateData,{new:true}),if we need to change the id
+    if (updateMovie) {
+      console.log("Updated Movie ", updateMovie);
+    } else {
+      console.log("Movie not found");
+    }
+    return updateMovie;
+  } catch (e) {
+    console.log("Error updating movie : ", e);
+  }
+}
 
 //seeding database with inital values
 async function seedDatabase() {
@@ -214,26 +249,6 @@ async function readMoviesByYear(movieYear) {
   }
 }
 // readMoviesByYear(2001)
-
-//update
-async function updateMovieById(movieId, updateData) {
-  try {
-    const updateMovie = await Movie.findByIdAndUpdate(
-      movieId,
-      updateData,
-      { new: true },
-      { runValidators: true }
-    );
-    //Movie.findOneAndUpdate({title:title},updateData,{new:true}),if we need to change the id
-    if (updateMovie) {
-      console.log("Updated Movie ", updateMovie);
-    }
-  } catch (e) {
-    console.log("Error updating movie : ", e);
-  }
-}
-
-// updateMovieById("650612ea7add67374607a797",{rating:7.2})
 
 //delete
 async function deleteMovieById(movieId) {
@@ -285,8 +300,5 @@ async function sortMoviesByYear() {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT} `);
-});
-n(PORT, () => {
   console.log(`Server is running on port ${PORT} `);
 });
