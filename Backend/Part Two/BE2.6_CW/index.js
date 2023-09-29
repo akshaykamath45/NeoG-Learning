@@ -37,6 +37,30 @@ async function createMovie(movieData) {
   }
 }
 
+//reading movies by rating API
+app.get("/movies/ratings", async (req, res) => {
+  try {
+    const movies = await sortMoviesByRatings();
+    if (movies.length === 0) {
+      res.status(404).json({ error: "Cannot sort movies" });
+    } else {
+      res.json({ message: "Sorted Movies by Ratings", movies: movies });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch ratings" });
+  }
+});
+
+async function sortMoviesByRatings() {
+  try {
+    const sortMovie = await Movie.find({}).sort({ rating: -1 });
+    console.log("Sorted Movies by Rating ", sortMovie);
+    return sortMovie;
+  } catch (e) {
+    console.log("Error sorting movies by rating ", e);
+  }
+}
+
 // reading a movie API
 app.get("/movies/:title", async (req, res) => {
   try {
@@ -277,17 +301,6 @@ async function readMoviesByYear(movieYear) {
   }
 }
 // readMoviesByYear(2001)
-
-//sorting
-async function sortMoviesByRatings() {
-  try {
-    const sortMovie = await Movie.find({}).sort({ rating: 1 });
-    console.log("Sorted Movies by Rating ", sortMovie);
-  } catch (e) {
-    console.log("Error sorting movies by rating ", e);
-  }
-}
-// sortMoviesByRatings();
 
 async function sortMoviesByYear() {
   //1 for ascending ,2 for descending
