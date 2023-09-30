@@ -103,6 +103,40 @@ async function changePassword(email, password, newPassword) {
 }
 
 
+//updating profile picture API
+app.post("/update-profile-picture", async (req, res) => {
+  try {
+    const { email, password, newPicUrl } = req.body;
+    const updatedUser = await updateProfilePicUrl(email, password, newPicUrl)
+    if (updatedUser) {
+      res.json({ message: "Update profile pic url for the user", user: updatedUser })
+    } else {
+      res.status(401).json({ error: "Invalid Credentials,Could not update profile pic " })
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update profile pic url" })
+  }
+})
+
+async function updateProfilePicUrl(email, password, newProfilePictureUrl) {
+
+  //no need of password validation
+  try {
+    const user = await User.findOne({ email })
+    if (user && user.password === password) {
+      console.log("Password Matched Succesfully,now updating profile pic url")
+      user.profilePictureUrl = newProfilePictureUrl;
+      const savePicUrl = await user.save();
+      console.log("Updated profile pic successfully ", savePicUrl);
+      return user
+      //doesn't matter if I return user or savedUser,it would be the smae thing.
+    } else {
+      console.log("Enter correct password")
+    }
+  } catch (e) {
+    console.log("Error updating profile pic url ", e);
+  }
+}
 
 
 async function addUser() {
@@ -126,24 +160,8 @@ async function addUser() {
 
 
 
-async function updateProfileUrl(email, password, newProfilePictureUrl) {
 
-  //no need of password validation
-  try {
-    const user = await User.findOne({ email })
-    if (user && user.password === password) {
-      console.log("Password Matched Succesfully,now updating profile pic url")
-      user.profilePictureUrl = newProfilePictureUrl;
-      const savePicUrl = await user.save();
-      console.log("Updated profile pic successfully ", savePicUrl);
-    } else {
-      console.log("Enter correct password")
-    }
-  } catch (e) {
-    console.log("Error updating profile pic url ", e);
-  }
-}
-// updateProfileUrl("example@example.com","password123","https://randomxyz.jpg");
+
 
 // signup({
 //   email: 'example@example.com',
