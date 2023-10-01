@@ -119,7 +119,6 @@ app.post("/update-profile-picture", async (req, res) => {
 })
 
 async function updateProfilePicUrl(email, password, newProfilePictureUrl) {
-
   //no need of password validation
   try {
     const user = await User.findOne({ email })
@@ -173,7 +172,37 @@ async function updateContactDetails(email, newContactNumber) {
   }
 }
 
+//finding user by phone number API
+app.get("/users/phone/:phoneNumber", async (req, res) => {
+  try {
+    const phoneNumber = req.params.phoneNumber;
+    const findUser = await findUserByPhoneNumber(phoneNumber)
+    if (findUser) {
+      res.json({ message: `Found user with the phone number ${phoneNumber}`, user: findUser })
+    } else {
+      res.status(404).json({ error: "Cannot find user" })
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to find user" })
+  }
+})
 
+async function findUserByPhoneNumber(phoneNumber) {
+  try {
+    const user = await User.findOne({ phoneNumber });
+    if (user) {
+      console.log("User found succeffully with username", user.username);
+      return user;
+    } else {
+      console.log("Sorry,user not found ");
+    }
+  } catch (e) {
+    console.log("Error finding phone number ", e)
+  }
+}
+
+
+//without API Calls
 
 async function addUser() {
   try {
@@ -192,47 +221,6 @@ async function addUser() {
 }
 // addUser();
 
-
-
-
-
-
-
-
-// signup({
-//   email: 'example@example.com',
-//   password: 'password123',
-//   profilePictureUrl: 'https://example.com/profile.jpg',
-//   username: 'exampleuser',
-//   nickname: 'Example Nick',
-// })
-
-
-
-// signup({
-//     email:'xyz@gmail.com',
-//     password:"xyz123",
-//     profilePictureUrl:"randomxyz.com",
-//     username:"xyz",
-//     nickname:"exwhyzee"
-// })
-
-
-
-
-async function findUserByPhoneNumber(phoneNumber) {
-  try {
-    const user = await User.findOne({ phoneNumber });
-    if (user) {
-      console.log("User found succeffully with username", user.username);
-    } else {
-      console.log("Sorry,user not found ");
-    }
-  } catch (e) {
-    console.log("Error finding phone number ", e)
-  }
-}
-// findUserByPhoneNumber(123456789);
 
 async function readAllUsers() {
   try {
