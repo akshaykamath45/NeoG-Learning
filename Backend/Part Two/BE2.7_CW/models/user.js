@@ -14,7 +14,9 @@ const userSchema = new mongoose.Schema(
     profilePictureUrl: String,
     username: { type: String, required: true, unique: true },
     nickname: String,
-    // Other fields can be added here
+    phoneNumber: {
+      type: Number
+    }
   },
   {
     timestamps: true,
