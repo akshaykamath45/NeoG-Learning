@@ -139,6 +139,42 @@ async function updateProfilePicUrl(email, password, newProfilePictureUrl) {
 }
 
 
+//updating contact details API
+app.post("/update-contact/:email", async (req, res) => {
+  try {
+    const email = req.params.email
+    // console.log(req.params.email);
+    const { contactNumber } = req.body
+    // console.log(contactNumber);
+    const updatedContact = await updateContactDetails(email, contactNumber)
+    if (updatedContact) {
+      res.json({ message: "Updated contact number successfully", user: updatedContact })
+    } else {
+      res.status(404).json({ error: "Cannot update contact details" })
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to updated contact details for the user" })
+  }
+})
+async function updateContactDetails(email, newContactNumber) {
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      console.log("Updating contact number");
+      user.phoneNumber = newContactNumber;
+      const saveUser = await user.save();
+      console.log("Updated Contact Number Successfully ", saveUser);
+      return saveUser
+    } else {
+      console.log("User not found")
+    }
+  } catch (e) {
+    console.log("Error updating contact details ", e);
+  }
+}
+
+
+
 async function addUser() {
   try {
     const newUser = new User({
@@ -182,22 +218,7 @@ async function addUser() {
 // })
 
 
-async function updateContactDetails(email, newContactNumber) {
-  try {
-    const user = await User.findOne({ email });
-    if (user) {
-      console.log("Updating contact number");
-      user.phoneNumber = newContactNumber;
-      const saveUser = await user.save();
-      console.log("Updated Contact Number Successfully ", saveUser);
-    } else {
-      console.log("User not found")
-    }
-  } catch (e) {
-    console.log("Error updating contact details ", e);
-  }
-}
-// updateContactDetails("example@example.com",123456789);
+
 
 async function findUserByPhoneNumber(phoneNumber) {
   try {
