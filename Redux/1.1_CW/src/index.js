@@ -14,4 +14,13 @@ const addCookie = document.getElementById("add");
 const removeCookie = document.getElementById("remove");
 const cookieCount = document.getElementById("cookie-count");
 
+const addCookieHandler = () => {
+    store.dispatch({ type: "cookies/added" });
+};
 
+const removeCookieHandler = () => {
+    store.dispatch({ type: "cookies/removed" });
+};
+
+addCookie.addEventListener("click", addCookieHandler);
+removeCookie.addEventListener("click", removeCookieHandler);
