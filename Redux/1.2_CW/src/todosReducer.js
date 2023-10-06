@@ -10,10 +10,7 @@ export const todosReducer = (state = initalState, action) => {
     case REMOVE_TODO: {
       return {
         ...state,
-        todos: [
-          ...state.todos,
-          state.todos.filter((_, index) => index !== action.payload) //payload will be index
-        ]
+        todos: state.todos.filter((_, index) => index !== action.payload) //payload will be index
       };
     }
     default: {
