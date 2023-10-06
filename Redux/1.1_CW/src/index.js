@@ -4,11 +4,14 @@ import { cookiesReducer } from "./cookiesReducer";
 const store = createStore(cookiesReducer);
 
 //whenever this a change in the store,please notify me
-
+//internally ,there is a inbuilt api,which will update the UI
 store.subscribe(() => {
     console.log(store.getState());
+    updateCookieCount();
 });
 
-store.dispatch({ type: "cookies/added" });
-store.dispatch({ type: "cookies/added" });
-store.dispatch({ type: "cookies/removed" });
+const addCookie = document.getElementById("add");
+const removeCookie = document.getElementById("remove");
+const cookieCount = document.getElementById("cookie-count");
+
+
