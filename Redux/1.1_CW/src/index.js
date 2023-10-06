@@ -24,3 +24,15 @@ const removeCookieHandler = () => {
 
 addCookie.addEventListener("click", addCookieHandler);
 removeCookie.addEventListener("click", removeCookieHandler);
+
+store.subscribe(() => {
+    console.log(store.getState())
+    updateCookieCount()
+})
+
+const updateCookieCount = () => {
+    const state = store.getState()
+    cookieCount.textContent = state.value
+}
+
+updateCookieCount()
