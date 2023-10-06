@@ -5,6 +5,7 @@ const store = createStore(todosReducer);
 
 const callMeWhenStateUpdates = () => {
     console.log(store.getState());
+    updateTodo();
 };
 store.subscribe(callMeWhenStateUpdates);
 
@@ -22,8 +23,22 @@ const addTodoHandler = () => {
         todoInput.value = "";
     }
 };
+
+//
 window.removeTodoHandler = (index) => {
     store.dispatch(removeTodo(index));
 };
 
 addButton.addEventListener("click", addTodoHandler);
+
+const updateTodo = () => {
+    const state = store.getState();
+    todoList.innerHTML = state.todos
+        .map(
+            (todo, index) =>
+                `<li>${todo} <button onclick=removeTodoHandler(${index})>Remove</button></li>`
+        )
+        .join("");
+};
+
+updateTodo();
