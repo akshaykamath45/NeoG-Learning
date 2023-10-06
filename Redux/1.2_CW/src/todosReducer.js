@@ -1,12 +1,13 @@
+import { ADD_TODO, REMOVE_TODO } from "./actionCreators";
 const initalState = { todos: [] };
 
 export const todosReducer = (state = initalState, action) => {
   switch (action.type) {
-    case "todos/added": {
+    case ADD_TODO: {
       return { ...state, todos: [...state.todos, action.payload] }; //payload will be text
     }
 
-    case "todos/removed": {
+    case REMOVE_TODO: {
       return {
         ...state,
         todos: [
