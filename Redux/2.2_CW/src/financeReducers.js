@@ -5,7 +5,7 @@ const initialState = {
     expense: 0
 };
 
-export const financeReducer = (state = initialState, action) => {
+export const financeReducers = (state = initialState, action) => {
     switch (action.type) {
         case ADD_AMOUNT: {
             return { ...state, amount: state.income + action.payload };
