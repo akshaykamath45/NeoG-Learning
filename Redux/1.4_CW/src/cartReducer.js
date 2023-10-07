@@ -1,8 +1,15 @@
+import {
+    ADD_TO_CART,
+    REMOVE_FROM_CART,
+    UPDATE_QUANTIY,
+    CALCULATE_TOTAL
+} from "./actionCreator";
+
 const initialState = { cartItems: [] };
 
 export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "cart/added": {
+        case ADD_TO_CART: {
             const existingCartItem = state.cartItems.find(
                 (item) => item.id === action.payload.id
             );
@@ -24,14 +31,14 @@ export const cartReducer = (state = initialState, action) => {
                 };
             }
         }
-        case "cart/removed": {
+        case REMOVE_FROM_CART: {
             return {
                 ...state,
                 cartItems: state.cartItems.filter((item) => item.id !== action.payload)
             };
         }
 
-        case "cart/updatedQuantity":
+        case UPDATE_QUANTIY:
             const updatedCartItems = state.cartItems.map((item) => {
                 if (item.id === action.payload.productId) {
                     return Object.assign({}, item, { quantity: action.payload.quantity });
@@ -39,7 +46,7 @@ export const cartReducer = (state = initialState, action) => {
                 return item;
             });
             return { ...state, cartItems: updatedCartItems };
-        case "cart/calculateTotal":
+        case CALCULATE_TOTAL:
             const totalPrice = state.cartItems.reduce(
                 (total, item) => total + item.price * item.quantity,
                 0
