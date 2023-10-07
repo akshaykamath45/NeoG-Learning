@@ -8,7 +8,7 @@ const initialState = {
 export const financeReducers = (state = initialState, action) => {
     switch (action.type) {
         case ADD_AMOUNT: {
-            return { ...state, amount: state.income + action.payload };
+            return { ...state, income: state.income + action.payload };
         }
         case ADD_EXPENSE: {
             return { ...state, expense: state.expense + action.payload };

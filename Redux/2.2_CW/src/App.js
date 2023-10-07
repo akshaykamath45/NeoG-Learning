@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { IncomeExpenseForm } from "./components/IncomeExpenseForm";
+import { FinanceSummary } from "./components/FinanceSummary";
+import { Provider } from "react-redux";
+import { store } from "./store";
 export default function App() {
-  // const dispatch = useDispatch();
-
   return (
-    <div>
-      <h3>Finance Management </h3>
-    </div>
+    <Provider store={store}>
+      <div>
+        <h3>Finance Management </h3>
+        <IncomeExpenseForm />
+        <FinanceSummary />
+      </div>
+    </Provider>
   );
 }
