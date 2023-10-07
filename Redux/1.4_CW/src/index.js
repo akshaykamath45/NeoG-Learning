@@ -52,3 +52,5 @@ store.dispatch(updateQuantity(2, Number(2)));
 store.dispatch(updateQuantity(1, Number(2)));
 store.dispatch(removeFromCart(1));
 store.dispatch(removeFromCart(4));
+
+//CODESANDBOX : https://codesandbox.io/s/rx1-4-cw-9ysrkp
