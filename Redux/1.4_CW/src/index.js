@@ -1,10 +1,16 @@
 import { createStore } from "redux";
 import { cartReducer } from "./cartReducer";
+import {
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    calculateTotal
+} from "./actionCreator";
 const store = createStore(cartReducer);
 
 const callMeWhenStateUpdates = () => {
     console.log(store.getState());
-    updateCart()
+    updateCart();
 };
 store.subscribe(callMeWhenStateUpdates);
 
@@ -34,7 +40,15 @@ const updateCart = () => {
         })
         .join("");
     cartTotal.innerHTML = state.cartItems.reduce(
-        (total, item) => total + item.price,
+        (total, item) => total + item.price * item.quantity,
         0
     );
 };
+store.dispatch(addToCart({ id: 1, name: "Product A", price: 10 }));
+store.dispatch(addToCart({ id: 2, name: "Product A", price: 10 }));
+store.dispatch(addToCart({ id: 3, name: "Product B", price: 20 }));
+store.dispatch(addToCart({ id: 4, name: "Product C", price: 30 }));
+store.dispatch(updateQuantity(2, Number(2)));
+store.dispatch(updateQuantity(1, Number(2)));
+store.dispatch(removeFromCart(1));
+store.dispatch(removeFromCart(4));
