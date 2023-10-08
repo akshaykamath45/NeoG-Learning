@@ -1,17 +1,23 @@
 import { ADD_AMOUNT, ADD_EXPENSE } from "./actions";
 
 const initialState = {
-  income: 0,
-  expense: 0
+  income: [],
+  expense: [],
+  savings: [],
+  loading: false,
+  error: null
 };
 
 export const financeReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_AMOUNT: {
-      return { ...state, income: state.income + action.payload };
+    case "FETCH_INCOME_SUCCESS": {
+      return { ...state, income: action.payload, loading: false, error: null };
     }
-    case ADD_EXPENSE: {
-      return { ...state, expense: state.expense + action.payload };
+    case "FETCH_INCOME_FAILURE": {
+      return { ...state, expense: action.payload, loading: false, error: null };
+    }
+    case "FETCH_DATA_LOADING": {
+      return { ...state, loading: true };
     }
     default: {
       return state;

@@ -7,8 +7,8 @@ export default function App() {
     <div>
       <Provider store={store}>
         <h3>Finance Management </h3>
-        <IncomeExpenseForm />
-        <FinanceSummary />
+        {/* <IncomeExpenseForm />
+        <FinanceSummary /> */}
       </Provider>
     </div>
   );
