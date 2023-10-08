@@ -1,5 +1,3 @@
-import { ADD_AMOUNT, ADD_EXPENSE } from "./actions";
-
 const initialState = {
   income: [],
   expense: [],
