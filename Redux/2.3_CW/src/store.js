@@ -1,5 +1,5 @@
-import { createStore } from "redux";
-
+import { createStore, applyMiddleware } from "redux";
+import { loggerMiddleware } from "./loggerMiddleware";
 let defaultState = {
   counter: 0
 };
@@ -21,4 +21,7 @@ const counterReducer = (state = defaultState, action) => {
   }
 };
 
-export default createStore(counterReducer);
+export const store = createStore(
+  counterReducer,
+  applyMiddleware(loggerMiddleware)
+);
